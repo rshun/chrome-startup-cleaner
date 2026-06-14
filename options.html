@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>启动清理设置</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main>
+      <h1>启动清理设置</h1>
+      <p class="description">所选数据只会在 Chrome 完全启动时自动清理。</p>
+
+      <section>
+        <h2>清理内容</h2>
+        <label class="setting">
+          <span>
+            <strong>浏览历史记录</strong>
+            <small>删除访问过的网页记录</small>
+          </span>
+          <input id="clear-history" type="checkbox">
+        </label>
+
+        <label class="setting">
+          <span>
+            <strong>缓存文件</strong>
+            <small>删除全部 HTTP 缓存，Chrome 不支持只删除图片缓存</small>
+          </span>
+          <input id="clear-cache" type="checkbox">
+        </label>
+      </section>
+
+      <section>
+        <h2>清理时间范围</h2>
+        <select id="time-range">
+          <option value="0">全部时间</option>
+          <option value="7">最近 7 天</option>
+          <option value="30">最近 30 天</option>
+          <option value="90">最近 90 天</option>
+        </select>
+        <p class="description">例如“最近 7 天”会删除最近七天产生的数据，保留更早的数据。</p>
+      </section>
+
+      <p id="save-status" role="status"></p>
+      <p id="cleanup-status" class="description">正在读取上次清理状态…</p>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>

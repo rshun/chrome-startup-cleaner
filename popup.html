@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>启动清理</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main>
+      <h1>启动清理设置</h1>
+      <p class="description">Chrome 启动时自动清除所选数据。</p>
+
+      <label class="setting">
+        <span>浏览历史记录</span>
+        <input id="clear-history" type="checkbox">
+      </label>
+
+      <label class="setting">
+        <span>缓存文件</span>
+        <input id="clear-cache" type="checkbox">
+      </label>
+
+      <label class="setting range-setting">
+        <span>清理时间范围</span>
+        <select id="time-range">
+          <option value="0">全部时间</option>
+          <option value="7">最近 7 天</option>
+          <option value="30">最近 30 天</option>
+          <option value="90">最近 90 天</option>
+        </select>
+      </label>
+
+      <p id="status" role="status">正在读取状态…</p>
+      <button id="open-options" type="button">打开完整设置页</button>
+      <p class="note">注意：Chrome 只能清除全部缓存，无法仅清除图片缓存。</p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
