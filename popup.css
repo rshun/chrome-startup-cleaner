@@ -64,6 +64,16 @@ button {
   font-weight: 600;
 }
 
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+button.secondary {
+  color: #246bfd;
+  background: #e8effe;
+}
+
 .range-setting {
   gap: 12px;
 }

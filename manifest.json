@@ -1,11 +1,12 @@
 {
   "manifest_version": 3,
   "name": "启动时清理记录与缓存",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Chrome 启动时自动清除浏览历史记录和缓存文件。",
   "permissions": [
     "browsingData",
-    "storage"
+    "storage",
+    "alarms"
   ],
   "background": {
     "service_worker": "background.js"

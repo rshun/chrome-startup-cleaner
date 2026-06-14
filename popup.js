@@ -2,6 +2,7 @@ const historyCheckbox = document.querySelector("#clear-history");
 const cacheCheckbox = document.querySelector("#clear-cache");
 const timeRangeSelect = document.querySelector("#time-range");
 const openOptionsButton = document.querySelector("#open-options");
+const cleanNowButton = document.querySelector("#clean-now");
 const status = document.querySelector("#status");
 
 function formatCleanup(cleanup) {
@@ -49,9 +50,39 @@ async function saveSettings() {
   });
 }
 
+async function cleanNow() {
+  // 先把当前勾选保存，确保按设置清理
+  await saveSettings();
+
+  cleanNowButton.disabled = true;
+  cleanNowButton.textContent = "清理中…";
+  status.textContent = "正在清理…";
+  status.dataset.success = "";
+
+  try {
+    const result = await chrome.runtime.sendMessage({ type: "cleanNow" });
+    if (!result?.success) {
+      throw new Error(result?.error ?? "未知错误");
+    }
+    await loadState();
+  } catch (error) {
+    status.textContent = `清理失败：${error.message}`;
+    status.dataset.success = "false";
+  } finally {
+    cleanNowButton.disabled = false;
+    cleanNowButton.textContent = "立即清理";
+  }
+}
+
 historyCheckbox.addEventListener("change", saveSettings);
 cacheCheckbox.addEventListener("change", saveSettings);
 timeRangeSelect.addEventListener("change", saveSettings);
+cleanNowButton.addEventListener("click", () => {
+  cleanNow().catch((error) => {
+    status.textContent = `清理失败：${error.message}`;
+    status.dataset.success = "false";
+  });
+});
 openOptionsButton.addEventListener("click", () => chrome.runtime.openOptionsPage());
 
 loadState().catch((error) => {
